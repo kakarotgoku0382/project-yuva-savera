@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sevak Dashboard | Yuva Savera</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2a7b72;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: #e55947;
+        }
+        
+        /* Main Dashboard Container */
+        .dashboard-container {
+            padding: 2rem 5%;
+        }
+
+        .dashboard-header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .dashboard-header h1 {
+            color: #2a7b72;
+        }
+        
+        .dashboard-header .welcome-message {
+            font-size: 1.2rem;
+        }
+
+        .welcome-message span {
+            font-weight: 700;
+            color: #e55947;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .profile-section .profile-icon {
+            font-size: 4rem;
+            color: #2a7b72;
+        }
+        
+        .profile-details h2 {
+            margin-top: 0;
+        }
+
+        .profile-details p {
+            margin: 0.5rem 0;
+            line-height: 1.6;
+        }
+
+        /* Grid Layout for Requests */
+        .requests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        h2.section-title {
+            color: #333;
+            border-bottom: 2px solid #2a7b72;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Request Card Styles */
+        .request-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+        }
+
+        .request-card h3 {
+            font-size: 1.25rem;
+            color: #2a7b72;
+            margin-top: 0;
+        }
+
+        .request-card .info {
+            font-size: 0.95rem;
+            color: #555;
+            margin: 0.5rem 0;
+        }
+
+        .request-card .info i {
+            margin-right: 0.5rem;
+            color: #e55947;
+        }
+
+        .request-card .description {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            color: #444;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #2a7b72;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #236a61;
+        }
+
+        .btn-secondary {
+            background-color: #e55947;
+            color: #fff;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d14836;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            background-color: #333;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">Yuva Savera</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+                <li><a href="#">Dashboard</a></li> <li><a href="contact.html">Contact</a></li>
+                <li><a href="index.html">Logout</a></li> </ul>
+        </nav>
+    </header>
+
+    <main class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Sevak Dashboard</h1>
+            <p class="welcome-message">Welcome back, <span>Anjali Sharma</span>!</p>
+        </div>
+
+        <section class="profile-section">
+            <div class="profile-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="profile-details">
+                <h2>My Profile</h2>
+                <p><strong>Name:</strong> Anjali Sharma</p>
+                <p><strong>Location:</strong> Bhubaneswar, Odisha</p>
+                <p><strong>Skills:</strong> Teaching, Basic First Aid, Counseling</p>
+                <p><strong>Impact:</strong> 3 Lives Touched | 5 Tasks Completed</p>
+            </div>
+        </section>
+
+        <section class="available-requests">
+            <h2 class="section-title">Available Help Requests</h2>
+            <div class="requests-grid">
+                <div class="request-card">
+                    <h3>Education Support for a Child</h3>
+                    <p class="info"><i class="fas fa-map-marker-alt"></i> Cuttack, Odisha</p>
+                    <p class="info"><i class="fas fa-bookmark"></i> Category: Education</p>
+                    <p class="description">A 10-year-old girl needs textbooks and tuition support to continue her studies. Her father is a daily wage laborer.</p>
+                    <div class="card-buttons">
+                        <a href="#" class="btn btn-primary">View Details</a>
+                        <a href="#" class="btn btn-secondary">Accept Request</a>
+                    </div>
+                </div>
+
+                <div class="request-card">
+                    <h3>Urgent Medical Supplies</h3>
+                    <p class="info"><i class="fas fa-map-marker-alt"></i> Puri, Odisha</p>
+                    <p class="info"><i class="fas fa-bookmark"></i> Category: Healthcare</p>
+                    <p class="description">An elderly couple requires assistance with purchasing their monthly medicines for diabetes and blood pressure.</p>
+                    <div class="card-buttons">
+                        <a href="#" class="btn btn-primary">View Details</a>
+                        <a href="#" class="btn btn-secondary">Accept Request</a>
+                    </div>
+                </div>
+
+                <div class="request-card">
+                    <h3>Need Shelter for Family</h3>
+                    <p class="info"><i class="fas fa-map-marker-alt"></i> Bhubaneswar, Odisha</p>
+                    <p class="info"><i class="fas fa-bookmark"></i> Category: Shelter</p>
+                    <p class="description">A family of four lost their home in the recent heavy rains and needs temporary shelter and food supplies.</p>
+                    <div class="card-buttons">
+                        <a href="#" class="btn btn-primary">View Details</a>
+                        <a href="#" class="btn btn-secondary">Accept Request</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="my-accepted-requests">
+            <h2 class="section-title">My Accepted Requests</h2>
+            <div class="requests-grid">
+                 <div class="request-card">
+                    <h3>Food Assistance for a Family</h3>
+                    <p class="info"><i class="fas fa-map-marker-alt"></i> Khurda, Odisha</p>
+                    <p class="info"><i class="fas fa-bookmark"></i> Category: Food Assistance</p>
+                    <p class="description">A single mother with two children needs urgent ration supplies for the week.</p>
+                    <div class="card-buttons">
+                        <a href="#" class="btn btn-primary">Update Progress</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Yuva Savera. Empowering Lives with Youth.</p>
+    </footer>
+
+</body>
+</html>
+```

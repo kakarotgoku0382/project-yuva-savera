@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login / Sign Up | Yuva Savera</title>
+  <link rel="stylesheet" href="login.css" />
+  <!-- Font Awesome (for icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav>
+      <div class="logo">Yuva Savera</div>
+      <ul class="nav-links">
+        <li><a href="index.html#hero">Home</a></li>
+        <li><a href="about_us.html">About Us</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html#impact">Impact</a></li>
+        <li><a href="index.html#partners">Partners</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login / Sign Up</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="auth-container">
+    <h1>Welcome to Yuva Savera</h1>
+    <div class="auth-buttons">
+      <button id="show-signin">Sign In</button>
+      <button id="show-signup">Sign Up</button>
+    </div>
+
+    <!-- Sign In Form -->
+    <form id="signin-form" class="hidden">
+      <h2>Sign In</h2>
+      <label for="signin-contact">Mobile or Email</label>
+      <input type="text" id="signin-contact" name="signin-contact" required />
+
+      <label for="signin-password">Password</label>
+      <input type="password" id="signin-password" name="signin-password" required />
+
+      <a href="#" class="forgot-link">Forgot password?</a>
+
+      <button type="submit">Sign In</button>
+    </form>
+
+    <!-- Sign Up Form -->
+    <form id="signup-form" class="hidden">
+      <h2>Sign Up</h2>
+
+      <!-- Register as -->
+      <label for="register-as">Register as:</label>
+      <select id="register-as" name="register-as" required>
+        <option value="">Select...</option>
+        <option value="yuva-sevak">Yuva Sevak (Volunteer)</option>
+        <option value="needy">Needy Individual</option>
+      </select>
+
+      <!-- Personal Details -->
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="contact">Contact Information</label>
+      <input type="text" id="contact" name="contact" required />
+
+      <label for="address">Address</label>
+      <textarea id="address" name="address" rows="2" required></textarea>
+
+      <!-- Aadhaar (only if Needy) -->
+      <div id="aadhaar-section" class="hidden">
+        <label for="aadhaar">Aadhaar Number</label>
+        <input type="text" id="aadhaar" name="aadhaar" />
+      </div>
+
+      <!-- Profession -->
+      <label for="profession">Profession</label>
+      <input type="text" id="profession" name="profession" />
+
+      <!-- Skills (only if Yuva Sevak) -->
+      <div id="skills-section" class="hidden">
+        <label for="skills">Skills</label>
+        <input type="text" id="skills" name="skills" placeholder="e.g., Teaching, First Aid" />
+      </div>
+
+      <!-- DOB and Age -->
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required />
+
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" readonly />
+
+      <button type="submit">Register</button>
+    </form>
+  </main>
+
+  <form id="signin-form">
+      </form>
+
+    <form id="signup-form" class="hidden">
+      </form>
+  </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

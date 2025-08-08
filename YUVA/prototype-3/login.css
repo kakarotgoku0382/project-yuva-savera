@@ -1,0 +1,200 @@
+/* Import Poppins font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* CSS Variables for a consistent theme */
+:root {
+  --primary-color: #f4c430;
+  --primary-hover-color: #e0b42a;
+  --accent-color: #0039cb;
+  --dark-bg: #000000;
+  --light-bg: #f7f9fc;
+  --text-light: #ffffff;
+  --text-dark: #222;
+  --border-color: #ccc;
+  --box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--light-bg);
+  color: var(--text-dark);
+  padding-top: 80px; /* space for fixed navbar */
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Vertically center the container */
+  min-height: 100vh;
+  margin: 0;
+}
+
+.auth-container {
+  max-width: 500px;
+  width: 90%;
+  padding: 2rem;
+  background: var(--dark-bg);
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+  margin-top: 0; /* Align with flexbox instead of fixed margin */
+}
+
+.auth-container h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-light);
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.auth-buttons button {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: var(--text-dark); /* Using dark text on light button */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.auth-buttons button:hover {
+  background: var(--accent-color);
+  color: var(--text-light); /* Better contrast on hover */
+}
+
+form {
+  text-align: left;
+  display: block; /* The default state should be visible for one form */
+}
+
+form h2 {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: 500;
+  color: var(--text-light); /* Consistent text color inside dark container */
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #fefefe;
+  color: var(--text-dark);
+}
+
+textarea {
+  resize: vertical;
+}
+
+button[type="submit"] {
+  margin-top: 2rem;
+  width: 100%;
+  background: var(--primary-color);
+  color: var(--text-dark);
+  padding: 0.75rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button[type="submit"]:hover {
+  background: var(--primary-hover-color);
+}
+
+.forgot-link {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--primary-color); /* Use a brand color for links */
+  text-align: right;
+  text-decoration: none;
+}
+
+.forgot-link:hover {
+  text-decoration: underline;
+}
+
+/* Show/hide toggle */
+.hidden {
+  display: none !important; /* Use !important to ensure it overrides other display properties */
+}
+
+/* Navbar */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  padding: 1rem 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: 1200px; /* Optional: Add a max-width for large screens */
+  margin: auto;
+}
+
+nav .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0e1a2b;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: var(--primary-color);
+}
+
+/* Media Query for Mobile Navigation */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    width: 100%;
+    padding: 1rem 0;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: none; /* Hide by default on mobile */
+  }
+
+  .nav-links.active {
+    display: flex; /* Show when active */
+  }
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Request Assistance | Yuva Savera</title>
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="request-help.css" />
+    <!-- Font Awesome (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header class="navbar-header">
+        <nav>
+            <div class="logo">Yuva Savera</div>
+            <ul class="nav-links">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="about_us.html">About Us</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="index.html#impact">Impact</a></li>
+                <li><a href="index.html#partners">Partners</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <div class="page-wrapper">
+        <header class="main-header">
+            <h1>Request Assistance</h1>
+            <p>Share your need and connect with volunteers who can help with education, healthcare, counseling and more.</p>
+        </header>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works-section">
+            <h2>How it works</h2>
+            <div class="steps-container">
+                <div class="step-card">
+                    <div class="icon-circle"><i class="fas fa-video"></i></div>
+                    <h3>1. Share Your Story</h3>
+                    <p>Record a short video or write about your need</p>
+                </div>
+                <div class="step-card">
+                    <div class="icon-circle"><i class="fas fa-search"></i></div>
+                    <h3>2. We Match Volunteers</h3>
+                    <p>Our system connects you with verified helpers nearby</p>
+                </div>
+                <div class="step-card">
+                    <div class="icon-circle"><i class="fas fa-hands-helping"></i></div>
+                    <h3>3. Receive Support</h3>
+                    <p>Get the help you need and track progress</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Submit Your Request Form Section -->
+        <section class="submit-request-section">
+            <h2>Submit Your Request</h2>
+            <form class="request-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full-name">Full Name</label>
+                        <input type="text" id="full-name" name="full-name" placeholder="Your name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="contact-number">Contact Number</label>
+                        <input type="tel" id="contact-number" name="contact-number" placeholder="Phone number" required />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="City/Village" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category of Help Needed</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select category</option>
+                        <option value="education">Education</option>
+                        <option value="healthcare">Healthcare</option>
+                        <option value="counseling">Counseling</option>
+                        <option value="food">Food Assistance</option>
+                        <option value="shelter">Shelter</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Describe Your Need</label>
+                    <textarea id="description" name="description" rows="5" placeholder="Briefly explain what help you need"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Video (Optional)</label>
+                    <div class="upload-area">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & drop video file or click to browse</p>
+                        <input type="file" id="video-upload" name="video-upload" accept="video/*" />
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </section>
+    </div>
+
+</body>
+</html>
