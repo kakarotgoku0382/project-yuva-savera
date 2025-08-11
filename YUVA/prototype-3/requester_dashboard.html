@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Dashboard | Yuva Savera</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a7b72;
+            --secondary-color: #e55947;
+            --background-color: #f0f4f8;
+            --white-color: #ffffff;
+            --text-color: #333;
+            --light-gray-color: #ccc;
+            --border-radius: 12px;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+            --status-pending: #f0ad4e;
+            --status-assigned: #5bc0de;
+            --status-completed: #5cb85c;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background: var(--white-color);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card h3 {
+            margin: 0.5rem 0 0.2rem;
+            color: var(--primary-color);
+        }
+
+        .profile-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar-nav li a.active, .sidebar-nav li a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .sidebar-nav li a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout-link {
+            margin-top: auto;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .main-header h1 {
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Request Status Card */
+        .request-status-card {
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 1.5rem;
+            padding: 1.5rem 2rem;
+        }
+        
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-top h2 {
+            margin: 0;
+            color: var(--primary-color);
+        }
+        
+        .status-tag {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            color: var(--white-color);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .status-pending { background-color: var(--status-pending); }
+        .status-assigned { background-color: var(--status-assigned); }
+        .status-completed { background-color: var(--status-completed); }
+        
+        /* Status Timeline */
+        .status-timeline {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            padding-bottom: 1.5rem;
+            padding-left: 2.5rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 5px;
+            width: 2px;
+            height: 100%;
+            background-color: var(--light-gray-color);
+        }
+        
+        .timeline-item:last-child::before {
+            height: 0;
+        }
+        
+        .timeline-icon {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--light-gray-color);
+            color: var(--white-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            z-index: 1;
+        }
+        
+        .timeline-item.completed .timeline-icon {
+            background-color: var(--primary-color);
+        }
+        
+        .timeline-content h4 {
+            margin: 0 0 0.3rem;
+        }
+        
+        .timeline-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        /* Assigned Volunteer Card */
+        .volunteer-card {
+            background-color: #e8f3f2;
+            border-left: 5px solid var(--primary-color);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .volunteer-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        
+        .volunteer-info p {
+            margin: 0;
+            line-height: 1.4;
+        }
+        
+        .volunteer-info p strong {
+            color: var(--primary-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">Yuva Savera</div>
+        
+        <div class="profile-card">
+            <img src="https://placehold.co/100x100/e55947/ffffff?text=RS" alt="Profile Picture" class="profile-img">
+            <h3>Ramesh Singh</h3>
+            <p>Requester</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> My Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="request-help.html"><i class="fas fa-plus-circle"></i> New Request</a></li>
+                <li><a href="contact.html"><i class="fas fa-headset"></i> Support</a></li>
+            </ul>
+        </nav>
+        
+        <a href="index.html" class="sidebar-nav logout-link">
+            <ul><li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li></ul>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="main-header">
+            <h1>My Help Requests</h1>
+            <a href="request-help.html" class="btn">Request New Help</a>
+        </header>
+
+        <!-- Request 1: In Progress -->
+        <div class="request-status-card">
+            <div class="card-top">
+                <h2>Urgent Medical Supplies</h2>
+                <span class="status-tag status-assigned">Volunteer Assigned</span>
+            </div>
+            <ul class="status-timeline">
+                <li class="timeline-item completed">
+                    <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                    <div class="timeline-content">
+                        <h4>Request Submitted</h4>
+                        <p>August 10, 2025</p>
+                    </div>
+                </li>
+                <li class="timeline-item completed">
+                    <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                    <div class="timeline-content">
+                        <h4>Request Verified</h4>
+                        <p>August 10, 2025</p>
+                    </div>
+                </li>
+                <li class="timeline-item completed">
+                    <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                    <div class="timeline-content">
+                        <h4>Volunteer Assigned</h4>
+                        <p>August 11, 2025</p>
+                        <div class="volunteer-card">
+                             <img src="https://placehold.co/100x100/2a7b72/ffffff?text=AS" alt="Volunteer">
+                             <div class="volunteer-info">
+                                <p><strong>Anjali Sharma</strong> has accepted your request.</p>
+                                <p>She will contact you shortly.</p>
+                             </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-ellipsis-h"></i></div>
+                    <div class="timeline-content">
+                        <h4>Assistance in Progress</h4>
+                        <p>Pending update from volunteer...</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        
+        <!-- Request 2: Pending -->
+        <div class="request-status-card">
+            <div class="card-top">
+                <h2>Education Support for Child</h2>
+                <span class="status-tag status-pending">Pending Review</span>
+            </div>
+             <ul class="status-timeline">
+                <li class="timeline-item completed">
+                    <div class="timeline-icon"><i class="fas fa-check"></i></div>
+                    <div class="timeline-content">
+                        <h4>Request Submitted</h4>
+                        <p>August 9, 2025</p>
+                    </div>
+                </li>
+                <li class="timeline-item">
+                    <div class="timeline-icon"><i class="fas fa-ellipsis-h"></i></div>
+                    <div class="timeline-content">
+                        <h4>Pending Verification</h4>
+                        <p>Our team will review your request within 24 hours.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </main>
+
+</body>
+</html>
