@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sevak Dashboard | Yuva Savera</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2a7b72;
+            --secondary-color: #e55947;
+            --background-color: #f0f4f8;
+            --white-color: #ffffff;
+            --text-color: #333;
+            --light-gray-color: #ccc;
+            --border-radius: 12px;
+            --shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* --- Sidebar --- */
+        .sidebar {
+            width: 260px;
+            background: var(--white-color);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #e0e0e0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .profile-card .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card h3 {
+            margin: 0.5rem 0 0.2rem;
+            color: var(--primary-color);
+        }
+
+        .profile-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+
+        .sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            text-decoration: none;
+            color: #555;
+            font-weight: 500;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .sidebar-nav li a.active, .sidebar-nav li a:hover {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .sidebar-nav li a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .logout-link {
+            margin-top: auto;
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .main-header h1 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Filter & Tabs */
+        .controls-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .filters select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--light-gray-color);
+            border-radius: var(--border-radius);
+            background-color: var(--white-color);
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            background-color: #e9ecef;
+            padding: 0.3rem;
+            border-radius: var(--border-radius);
+        }
+
+        .tab-btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .tab-btn.active {
+            background-color: var(--white-color);
+            color: var(--primary-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* Request Grid */
+        .requests-container {
+            display: none;
+        }
+        .requests-container.active {
+            display: block;
+        }
+        .requests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .request-card {
+            background: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .card-header h3 {
+            margin: 0;
+            font-size: 1.2rem;
+        }
+        
+        .urgency-tag {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-info {
+            display: flex;
+            gap: 1rem;
+            color: #666;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+        
+        .card-info i {
+            color: var(--primary-color);
+        }
+
+        .card-description {
+            flex-grow: 1;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .card-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        .btn {
+            padding: 0.7rem 1.2rem;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white-color);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 2000;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: var(--white-color);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 600px;
+            transform: scale(0.9);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .modal-body .video-placeholder {
+            width: 100%;
+            height: 250px;
+            background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+        }
+        
+        .modal-body .video-placeholder i {
+            font-size: 3rem;
+            color: var(--light-gray-color);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="logo">Yuva Savera</div>
+        
+        <div class="profile-card">
+            <img src="https://placehold.co/100x100/2a7b72/ffffff?text=AS" alt="Profile Picture" class="profile-img">
+            <h3>Anjali Sharma</h3>
+            <p>Yuva Sevak</p>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li>
+                <li><a href="#"><i class="fas fa-history"></i> My History</a></li>
+                <li><a href="contact.html"><i class="fas fa-headset"></i> Support</a></li>
+            </ul>
+        </nav>
+        
+        <a href="index.html" class="sidebar-nav logout-link">
+            <ul><li><a href="index.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li></ul>
+        </a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="main-header">
+            <h1>Dashboard</h1>
+        </header>
+
+        <div class="controls-container">
+            <div class="filters">
+                <select id="filter-location">
+                    <option value="all">All Locations</option>
+                    <option value="Bhubaneswar">Bhubaneswar</option>
+                    <option value="Cuttack">Cuttack</option>
+                    <option value="Puri">Puri</option>
+                </select>
+                <select id="filter-category">
+                    <option value="all">All Categories</option>
+                    <option value="Education">Education</option>
+                    <option value="Healthcare">Healthcare</option>
+                    <option value="Shelter">Shelter</option>
+                    <option value="Food">Food</option>
+                </select>
+            </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="available">Available Tasks</button>
+                <button class="tab-btn" data-tab="accepted">My Tasks</button>
+                <button class="tab-btn" data-tab="completed">Completed</button>
+            </div>
+        </div>
+
+        <!-- Available Requests Container -->
+        <div id="available" class="requests-container active">
+            <div class="requests-grid">
+                <!-- Dynamic cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+        
+        <!-- My Accepted Tasks Container -->
+        <div id="accepted" class="requests-container">
+            <div class="requests-grid">
+                 <!-- Sample Accepted Request Card -->
+                 <div class="request-card" data-location="Khurda" data-category="Food">
+                    <div class="card-header">
+                        <h3>Food Assistance</h3>
+                        <span class="urgency-tag">In Progress</span>
+                    </div>
+                    <div class="card-info">
+                        <span><i class="fas fa-map-marker-alt"></i> Khurda</span>
+                        <span><i class="fas fa-calendar-alt"></i> Accepted: 2 days ago</span>
+                    </div>
+                    <p class="card-description">A single mother with two children needs urgent ration supplies for the week.</p>
+                    <div class="card-footer">
+                        <button class="btn btn-primary">Update Progress</button>
+                        <button class="btn btn-secondary">Mark as Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Tasks Container -->
+        <div id="completed" class="requests-container">
+             <div class="requests-grid">
+                 <!-- Sample Completed Request Card -->
+                 <div class="request-card" data-location="Bhubaneswar" data-category="Education">
+                    <div class="card-header">
+                        <h3>Book Donation</h3>
+                        <span class="urgency-tag" style="background-color: #5cb85c;">Completed</span>
+                    </div>
+                    <div class="card-info">
+                        <span><i class="fas fa-map-marker-alt"></i> Bhubaneswar</span>
+                        <span><i class="fas fa-check-circle"></i> Completed: 1 week ago</span>
+                    </div>
+                    <p class="card-description">Provided textbooks for Grade 8 to a student in need.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Request Details -->
+    <div class="modal-overlay" id="details-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Request Title</h2>
+                <button class="close-modal" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="video-placeholder">
+                     <i class="fas fa-video"></i>
+                </div>
+                <p><strong>Location:</strong> <span id="modal-location"></span></p>
+                <p><strong>Category:</strong> <span id="modal-category"></span></p>
+                <p id="modal-description">Full description of the request...</p>
+            </div>
+            <div class="modal-footer" style="display: flex; justify-content: flex-end;">
+                 <button class="btn btn-primary">Accept Task</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Sample Data ---
+            const requests = [
+                { id: 1, title: 'Education Support', location: 'Cuttack', category: 'Education', urgency: 'High', description: 'A 10-year-old girl needs textbooks and tuition support to continue her studies. Her father is a daily wage laborer and cannot afford her school fees this term.', video: true },
+                { id: 2, title: 'Urgent Medical Supplies', location: 'Puri', category: 'Healthcare', urgency: 'High', description: 'An elderly couple requires assistance with purchasing their monthly medicines for diabetes and blood pressure. They have a prescription but lack the funds.', video: false },
+                { id: 3, title: 'Need Shelter for Family', location: 'Bhubaneswar', category: 'Shelter', urgency: 'Medium', description: 'A family of four lost their home in the recent heavy rains and needs temporary shelter and food supplies. They are currently staying at a relative\'s crowded house.', video: true },
+                { id: 4, title: 'Ration for a Week', location: 'Bhubaneswar', category: 'Food', urgency: 'High', description: 'A daily wage worker has been out of work for two weeks and his family is running out of essential food items like rice, dal, and oil.', video: false },
+                 { id: 5, title: 'Career Counseling', location: 'Cuttack', category: 'Education', urgency: 'Low', description: 'A high school student from a low-income family needs guidance on career options and college applications.', video: false },
+            ];
+
+            const availableGrid = document.querySelector('#available .requests-grid');
+            const locationFilter = document.getElementById('filter-location');
+            const categoryFilter = document.getElementById('filter-category');
+
+            // --- Render Cards ---
+            function renderCards() {
+                availableGrid.innerHTML = '';
+                const location = locationFilter.value;
+                const category = categoryFilter.value;
+
+                const filteredRequests = requests.filter(req => {
+                    const locationMatch = location === 'all' || req.location === location;
+                    const categoryMatch = category === 'all' || req.category === category;
+                    return locationMatch && categoryMatch;
+                });
+
+                if (filteredRequests.length === 0) {
+                    availableGrid.innerHTML = '<p>No requests match the current filters.</p>';
+                    return;
+                }
+
+                filteredRequests.forEach(req => {
+                    const card = document.createElement('div');
+                    card.className = 'request-card';
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h3>${req.title}</h3>
+                            <span class="urgency-tag">${req.urgency}</span>
+                        </div>
+                        <div class="card-info">
+                            <span><i class="fas fa-map-marker-alt"></i> ${req.location}</span>
+                            <span><i class="fas fa-bookmark"></i> ${req.category}</span>
+                        </div>
+                        <p class="card-description">${req.description.substring(0, 100)}...</p>
+                        <div class="card-footer">
+                            <button class="btn btn-primary view-details" data-id="${req.id}">View Details</button>
+                            <button class="btn btn-secondary">Accept Task</button>
+                        </div>
+                    `;
+                    availableGrid.appendChild(card);
+                });
+            }
+
+            // --- Tab Switching ---
+            const tabs = document.querySelectorAll('.tab-btn');
+            const containers = document.querySelectorAll('.requests-container');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+
+                    containers.forEach(c => c.classList.remove('active'));
+                    document.getElementById(tab.dataset.tab).classList.add('active');
+                });
+            });
+
+            // --- Modal Logic ---
+            const modal = document.getElementById('details-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+
+            function openModal(request) {
+                document.getElementById('modal-title').innerText = request.title;
+                document.getElementById('modal-location').innerText = request.location;
+                document.getElementById('modal-category').innerText = request.category;
+                document.getElementById('modal-description').innerText = request.description;
+                modal.classList.add('active');
+            }
+
+            function closeModal() {
+                modal.classList.remove('active');
+            }
+            
+            closeModalBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            availableGrid.addEventListener('click', (e) => {
+                if (e.target.classList.contains('view-details')) {
+                    const requestId = parseInt(e.target.dataset.id);
+                    const request = requests.find(r => r.id === requestId);
+                    if (request) {
+                        openModal(request);
+                    }
+                }
+            });
+            
+            // --- Initial Render & Event Listeners ---
+            locationFilter.addEventListener('change', renderCards);
+            categoryFilter.addEventListener('change', renderCards);
+            renderCards();
+        });
+    </script>
+</body>
+</html>
